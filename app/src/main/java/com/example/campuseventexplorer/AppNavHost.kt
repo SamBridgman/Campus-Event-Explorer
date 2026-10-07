@@ -8,30 +8,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
 
-/** Slide 18 navigation graph. */
-//@Composable
-//fun AppNavHost(
-//    navController: NavHostController,
-//    topics: List<StudyTopic>,
-//) {
-//    NavHost(navController, startDestination = Planner) {
-//        composable<Planner> {
-//            PlannerScreen(
-//                topics = topics,
-//                onTopicSelected = { topicId ->
-//                    navController.navigate(TopicDetail(topicId))
-//                },
-//            )
-//        }
-//        composable<TopicDetail> { entry ->
-//            val route = entry.toRoute<TopicDetail>()
-//            TopicDetailScreen(
-//                topic = topics.firstOrNull { it.id == route.topicId },
-//                onBack = navController::navigateUp,
-//            )
-//        }
-//    }
-//}
 @Composable
 fun AppNavHost(
     navController: NavHostController,
