@@ -87,6 +87,7 @@ fun EventScreen(
 
             }
 
+
         }
     }
 }
@@ -110,6 +111,7 @@ fun EventCard(event: CampusEvent, modifier: Modifier = Modifier, onClick: () -> 
         }
     }
 }
+
 
 
 

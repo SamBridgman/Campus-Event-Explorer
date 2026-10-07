@@ -1,5 +1,8 @@
 package com.example.campuseventexplorer
 
+import android.content.Context
+import android.content.Intent
+import android.content.Intent.ACTION_SEND
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -13,9 +16,11 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.content.ContextCompat.startActivity
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -55,15 +60,28 @@ fun EventDetailScreen(
                 EventDetailScreenText(EventText.LOCATION, event.location)
                 EventDetailScreenText(EventText.TIME, event.time)
                 EventDetailScreenText(EventText.DESC, event.description)
+
+                val context = LocalContext.current
+
+                Button(onClick = {
+                    val intent = Intent(Intent.ACTION_SEND).apply {
+                        type = "text/plain"
+                        putExtra(Intent.EXTRA_TEXT, "${event.title} ${event.time} ${event.location}")
+                    }
+                    context.startActivity(Intent.createChooser(intent, null))
+                }) {
+                    Text("Share Event")
+                }
+
             } else {
                 Text("Event not found")
+                Button(
+                    onClick = onBack
+                ) {
+                    Text("Return to Events")
+                }
             }
 
-            Button(
-                onClick = {}
-            ) {
-                Text("Share Event")
-            }
 
 
         }
