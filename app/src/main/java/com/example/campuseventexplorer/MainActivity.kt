@@ -11,6 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.rememberNavController
 import com.example.campuseventexplorer.ui.theme.CampusEventExplorerTheme
 
 class MainActivity : ComponentActivity() {
@@ -19,9 +20,17 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             CampusEventExplorerTheme {
-                EventScreen(events = sampleEvents)
+                CampusEventExplorerApp()
             }
         }
     }
 }
 
+@Composable
+fun CampusEventExplorerApp() {
+    val navController = rememberNavController()
+    AppNavHost(
+        navController = navController,
+        events = sampleEvents
+    )
+}

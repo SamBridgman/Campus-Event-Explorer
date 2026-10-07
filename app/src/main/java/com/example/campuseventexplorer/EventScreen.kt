@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.OutlinedTextField
@@ -34,7 +35,8 @@ enum class EventText {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun EventScreen(
-    events: List<CampusEvent>
+    events: List<CampusEvent>,
+    onEventSelected: (Long) -> Unit,
 ) {
 
     var query by rememberSaveable { mutableStateOf("") }
@@ -80,7 +82,7 @@ fun EventScreen(
             ) {
 
                 items(filteredEvents, key= { it.id }) {
-                    EventCard(it)
+                    EventCard(it, onClick = {onEventSelected(it.id)} )
                 }
 
             }
@@ -90,7 +92,7 @@ fun EventScreen(
 }
 
 @Composable
-fun EventCard(event: CampusEvent, modifier: Modifier = Modifier) {
+fun EventCard(event: CampusEvent, modifier: Modifier = Modifier, onClick: () -> Unit ) {
     Column(
         modifier = modifier.fillMaxWidth().padding(16.dp).background(Color.LightGray, shape = RoundedCornerShape(16.dp)).padding(12.dp),
         verticalArrangement = Arrangement.spacedBy(10.dp),
@@ -101,6 +103,11 @@ fun EventCard(event: CampusEvent, modifier: Modifier = Modifier) {
         EventScreenText(EventText.CATEGORY,event.category)
         EventScreenText(EventText.TIME ,event.time)
 
+        Button(
+            onClick = onClick
+        ) {
+            Text("Learn More")
+        }
     }
 }
 
