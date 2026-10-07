@@ -21,3 +21,6 @@
   	
 6.	What makes the Share action an implicit intent?
     It specifies ACTION_SEND, the "text/plain" type, and the shared text without naming a specific app or component. Intent.createChooser() lets the user choose a the  app they want to share to.
+
+
+No generative AI was used.
