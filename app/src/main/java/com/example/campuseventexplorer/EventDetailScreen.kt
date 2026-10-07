@@ -25,11 +25,10 @@ import androidx.core.content.ContextCompat.startActivity
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun EventDetailScreen(
-    eventId: Long?,
+    event: CampusEvent?,
     onBack: () -> Unit,
+    onShare: () -> Unit
 ) {
-
-    val event = sampleEvents.firstOrNull { it.id == eventId }
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -61,15 +60,8 @@ fun EventDetailScreen(
                 EventDetailScreenText(EventText.TIME, event.time)
                 EventDetailScreenText(EventText.DESC, event.description)
 
-                val context = LocalContext.current
 
-                Button(onClick = {
-                    val intent = Intent(Intent.ACTION_SEND).apply {
-                        type = "text/plain"
-                        putExtra(Intent.EXTRA_TEXT, "${event.title} ${event.time} ${event.location}")
-                    }
-                    context.startActivity(Intent.createChooser(intent, null))
-                }) {
+                Button(onClick = onShare) {
                     Text("Share Event")
                 }
 
